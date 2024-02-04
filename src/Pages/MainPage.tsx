@@ -1,12 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 function MainPage() {
   const [message, setMessage] = useState("");
+  const noButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleNoClick = () => {
     setMessage("Forkert svar, prøv igen!");
   };
+
+  const handleNoHover = () => {
+    const noButton = noButtonRef.current;
+    if (noButton) {
+      const x = Math.floor(Math.random() * window.innerWidth);
+      const y = Math.floor(Math.random() * window.innerHeight);
+      noButton.style.position = "absolute";
+      noButton.style.left = `${x}px`;
+      noButton.style.top = `${y}px`;
+    }
+  };
+
+  useEffect(() => {
+    const noButton = noButtonRef.current;
+    if (noButton) {
+      noButton.addEventListener("mouseover", handleNoHover);
+      return () => {
+        noButton.removeEventListener("mouseover", handleNoHover);
+      };
+    }
+  }, []);
 
   return (
     <div className="items-center justify-center flex flex-col bg-gradient-to-b from-[#9b7bd6] via-[#9845cf] to-[#f00ddd] h-screen w-full">
@@ -25,7 +47,9 @@ function MainPage() {
           </button>
         </Link>
         <button
+          ref={noButtonRef}
           onClick={handleNoClick}
+          onMouseOver={handleNoHover}
           className="bg-red-500 hover:bg-red-700 text-white text-2xl flex-row font-bold py-2 px-4 rounded-2xl mx-8 h-16 w-32 font-romantic"
         >
           Nej

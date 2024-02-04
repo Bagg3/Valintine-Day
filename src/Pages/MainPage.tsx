@@ -11,7 +11,7 @@ function MainPage() {
   return (
     <div className="items-center justify-center flex flex-col bg-gradient-to-b from-[#9b7bd6] via-[#9845cf] to-[#f00ddd] h-screen w-full">
       <h1 className="text-5xl font-bold items-center flex-col mb-10 font-romantic text-white">
-        Vil du være min Valintines Date?
+        Vil du være min Valentines Date?
       </h1>
       <img
         className="flex-col w-1/5 rounded-full"
